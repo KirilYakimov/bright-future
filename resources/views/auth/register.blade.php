@@ -16,15 +16,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-row">
-                            <div class="font-weight-bold pb-1 mb-2">{{ __('Create your account') }}</div>
-
-                            <select name="organizer" class="custom-select mb-3" id="organizer" required>
-                                <option value="" disabled selected hidden>Account Type</option>
-                                <option value="false">Client</option>
-                                <option value="true">Organizer</option>
-                            </select>
-                        </div>
+                        <div class="font-weight-bold pb-1 mb-2">{{ __('Create your account') }}</div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
@@ -99,7 +91,7 @@
                                 <label for="lastname">{{ __('Last name') }}</label>
 
                                 <div>
-                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" placeholder="First name" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
+                                    <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" placeholder="Last name" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
 
                                     @error('lastname')
                                     <span class="invalid-feedback" role="alert">

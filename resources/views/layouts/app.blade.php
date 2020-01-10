@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 @guest
                 @if (Route::has('register'))
@@ -75,24 +75,13 @@
                         @endif
 
                         @else
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" id="list-tab" role="tablist">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <span class="caret">My account</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                                 <a class="dropdown-item" href="{{ route('profile.show', auth()->user()->id)}}">{{ __('My profile') }}</a>
-
-                                <a class="sub-menu dropdown-item collapsed " href="#submenu" data-toggle="collapse" data-target="#submenu">
-                                    {{ __('My blog') }}
-                                </a>
-                                <div class="sub-item collapse" id="submenu" aria-expanded="false">
-
-                                    <a class="dropdown-item" href="#">{{ __('approved') }}</a>
-
-                                    <a class="dropdown-item" href="#">{{ __('waiting for approvals') }}</a>
-
-                                </div>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();"> {{ __('Log out') }}
@@ -109,8 +98,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
-
+        <main role="main" class="py-4 flex-grow">
             <div class="container">
                 @if(Session::has('success'))
                 <div class="alert alert-success text-center" role="alert">
@@ -118,7 +106,7 @@
                     <script>
                         setTimeout(function() {
                             $(".alert.alert-success").slideUp(1000);
-                        }, 5000);
+                        }, 4000);
                     </script>
                 </div>
                 @endif
@@ -132,6 +120,17 @@
 
             @yield('content')
         </main>
+
+        <!-- Footer -->
+
+        <footer class="footer fixed-bottom mt-auto py-3 bg-dark font-small">
+            <!-- Copyright -->
+            <div class="container">
+                <div class="footer-copyright text-center">© 2020 Copyright:
+                    <a href="{{ url('/home') }}">BrightFuture.com</a>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 

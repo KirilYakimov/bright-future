@@ -25,3 +25,7 @@ Route::get('/about', 'AboutController@index')->name('about');
 //For contact
 Route::get('/contact', 'ContactController@create')->name('contact.create');
 Route::post('/contact', 'ContactController@store')->name('contact.store');
+
+//For user edit  
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile.show')->middleware('verified');
+Route::patch('/profile/{user}', 'ProfileController@update')->name('profile.update');
