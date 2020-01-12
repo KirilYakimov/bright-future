@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
             $image_path = $request->file('image');
             $filename = time() . "." . $image_path->getClientOriginalExtension();
-            Image::make($image_path)->save(public_path('' . $filename));
+            Image::make($image_path)->save(public_path('storage/profile/' . $filename));
 
             $user = Auth::user();
             $user->image = $filename;

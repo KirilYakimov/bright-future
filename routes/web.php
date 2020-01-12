@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/home', 'PostController@create');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/home', 'PostController@store')->name('post.store');
 
 //For about
 Route::get('/about', 'AboutController@index')->name('about');
