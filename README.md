@@ -1,6 +1,6 @@
 # Bright future project
 
-School project which will write posts to database which will be seen by accessing endpoint which will show on the hope wall.
+School project which will write posts to database which will be seen by accessing endpoint which will show on the home wall.
 
 ## Pre-reqs
 
@@ -22,7 +22,8 @@ $ composer require intervention/image
 
 If you want to edit the projct and make new content you will neeed to install npm
 ```
-$npm insstall
+$ npm install
+$ npm install --save @fortawesome/fontawesome-free
 ```
 
 In order to connect the laravel installation with your database and other stuff copy the `.env.example` file:

@@ -15,8 +15,11 @@
 
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
-                        <div class="font-weight-bold pb-1 mb-2">{{ __('Create your account') }}</div>
+                        
+                        <div class="form-row">
+                            <i class="far fa-address-book"></i>
+                            <div class="font-weight-bold pb-1 mb-2">{{ __('Create your account') }}</div>
+                        </div>
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
