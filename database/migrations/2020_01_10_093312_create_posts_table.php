@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('comments', function ($table) {
+        Schema::table('posts', function ($table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

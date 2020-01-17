@@ -7,7 +7,7 @@
             <div class="col-md-8 offset-md-2">
 
                 <!-- Create a post/status -->
-                <div>
+                <div class="mb-3">
 
                     <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -23,15 +23,15 @@
                                     <div class="input-group-prepend">
                                         <img class="rounded-lg" src="{{ asset('storage/profile/'.auth()->user()->image) }}" style="width:50px; height:50px;" alt="profile picture">
                                     </div>
-                                    <textarea type="text" class="form-control textarea ml-1" name="post_text" rows="3" placeholder="What's on your mind?"></textarea>
+                                    <textarea id="text" type="text" class="form-control textarea ml-1" name="post_text" rows="3" placeholder="What's on your mind?"></textarea>
                                 </div>
-                                
 
-                                <div class="form-row mb-0">
+
+                                <div class="form-row mb-0 justify-content-between">
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="castomFile" name="post_image">
-                                        <label class="custom-file-label" for="customFile">Upload image</label>
+                                        <input type="file" class="custom-file-input" id="image" name="post_image">
+                                        <label class="custom-file-label" for="image">Upload image</label>
                                     </div>
 
                                     <div class="text-center">
@@ -47,7 +47,9 @@
                 <!-- /Create a post-status -->
 
                 <!-- all users posts -->
-
+                @foreach($posts as $post)
+                @include('layouts.posts.post')
+                @endforeach
                 <!-- /all users posts -->
             </div>
         </div>

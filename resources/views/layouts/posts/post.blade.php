@@ -3,12 +3,12 @@
         <div class="card-title row">
 
             <div class="">
-                <img alt="profile picture" style="width:50px; height:50px;" class="rounded-lg ml-3" src="{{ asset('storage/profile/'.auth()->user()->image) }}" alt="User">
+                <img alt="profile picture" style="width:50px; height:50px;" class="rounded-lg ml-3" src="{{ asset('storage/profile/'.$post->user->image) }}" alt="User">
             </div>
 
             <div class="pl-2">
 
-                <h5 class="card-title">{{ $user->username }}</h5>
+                <h5 class="card-title">{{ $post->user->username }}</h5>
 
                 <p class="card-subtitle">
                     <small><span><i class="icon ion-md-time"></i>{{ date( 'F j, Y, g:i a', strtotime($post->created_at)) }}</span></small>
@@ -45,7 +45,7 @@
         <!--/ Post image -->
 
         <!-- Likes and comments -->
-        <div class="mt-3 border-top border-bottom btn-toolbar justify-content-between">
+        <div class="mt-3 border-top border-bottom btn-toolbar">
             <div class="btn-group">
                 <button class="btn btn-outline-dark">num of likes</button>
             </div>

@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'PostController@create');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PostController@index')->name('home');
 Route::post('/home', 'PostController@store')->name('post.store');
 
 //For about

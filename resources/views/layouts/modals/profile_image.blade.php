@@ -15,10 +15,12 @@
                 @csrf
 
                 <div class="modal-body">
-                     <div class="row">
-                         <label for="image" class="col-md-4 col-form-label">Profile image</label>
+                    <div class="row">
 
-                         <input type="file" class="form-control-file" id="image" name="image">
+                        <div class="custom-file ml-2 mr-2">
+                            <input type="file" class="custom-file-input" id="image" name="image">
+                            <label class="custom-file-label" for="image">Upload image</label>
+                        </div>
 
                         @if ($errors->has('image'))
                         <strong>{{ $errors->first('image') }}</strong>

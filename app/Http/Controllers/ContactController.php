@@ -18,7 +18,7 @@ class ContactController extends Controller
             'mailMessege' => 'required|min:10'
         ]);
         //change mail when admin is created!
-        Mail::to('admin@evento.com')->send(new ContactMail($data));
+        Mail::to('admin@brightf.com')->send(new ContactMail($data));
         return redirect('contact')->with('success', 'Thank you for contacting us!');
     }
 }
