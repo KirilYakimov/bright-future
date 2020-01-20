@@ -23,15 +23,27 @@
                                     <div class="input-group-prepend">
                                         <img class="rounded-lg" src="{{ asset('storage/profile/'.auth()->user()->image) }}" style="width:50px; height:50px;" alt="profile picture">
                                     </div>
-                                    <textarea id="text" type="text" class="form-control textarea ml-1" name="post_text" rows="3" placeholder="What's on your mind?"></textarea>
+                                    <textarea id="text" type="text" class="form-control textarea ml-1  @error('post_text') is-invalid @enderror" name="post_text" rows="3" placeholder="What's on your mind?"></textarea>
+
+                                    @error('post_text')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
 
                                 <div class="form-row mb-0 justify-content-between">
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="image" name="post_image">
+                                        <input type="file" class="custom-file-input @error('post_image') is-invalid @enderror" id="image" name="post_image">
                                         <label class="custom-file-label" for="image">Upload image</label>
+
+                                        @error('post_image')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
 
                                     <div class="text-center">
@@ -47,9 +59,16 @@
                 <!-- /Create a post-status -->
 
                 <!-- all users posts -->
-                @foreach($posts as $post)
+                @forelse($posts as $post)
                 @include('layouts.posts.post')
-                @endforeach
+                @empty
+                <div class="col-12">
+                    <h3>There are still no posts</h3>
+                </div>
+                @endforelse
+                <div class="col-12 row d-flex justify-content-center">
+                    {{ $posts->links() }}
+                </div>
                 <!-- /all users posts -->
             </div>
         </div>

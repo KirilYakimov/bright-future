@@ -18,10 +18,8 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('post_text')->nullable();
             $table->string('post_image')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::table('posts', function ($table) {
+            $table->timestamps(); 
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -33,7 +31,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(['user_id']);
         Schema::dropIfExists('posts');
     }
 }

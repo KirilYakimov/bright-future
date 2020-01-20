@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = User::all();
+        $posts = Post::with('user')->latest()->paginate(7);
+        return view('/home', compact('user', 'posts'));
     }
 }

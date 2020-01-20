@@ -84,7 +84,7 @@
                             <label for="email">Email:</label>
 
                             <div>
-                                <label for="email">for admin email</label>
+                                <label for="email">admin@brightf.com</label>
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@
                             <label for="phone">Phone</label>
 
                             <div>
-                                <label for="phone">for admin phone</label>
+                                <label for="phone">Not added yet!</label>
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@
                             <label for="address">Address:</label>
 
                             <div>
-                                <label for="address">for admin address</label>
+                                <label for="address">Not added yet!</label>
                             </div>
                         </div>
                     </div>

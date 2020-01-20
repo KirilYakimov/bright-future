@@ -49457,7 +49457,7 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./imageupload */ "./resources/js/imageupload.js");
+__webpack_require__(/*! ./main */ "./resources/js/main.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
@@ -49597,16 +49597,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/imageupload.js":
-/*!*************************************!*\
-  !*** ./resources/js/imageupload.js ***!
-  \*************************************/
+/***/ "./resources/js/main.js":
+/*!******************************!*\
+  !*** ./resources/js/main.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(".custom-file-input").on("change", function () {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+$(document).ready(function () {
+  // alert for updating posting
+  setTimeout(function () {
+    $(".alert").slideUp(1000);
+  }, 4000); //Show image name on upload
+
+  $(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
 });
 
 /***/ }),

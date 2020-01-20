@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -11,11 +12,10 @@ use Intervention\Image\Facades\Image;
 class PostController extends Controller
 {
 
-    public function index()
+    public function show(Post $post)
     {
-        $user = User::all();
-        $posts = Post::with('user')->latest()->get(); //->paginate(5);
-        return view("home", compact('user', 'posts'));
+        $comments = Comment::with('post')->latest()->paginate(7);
+        return view('pages.show_post', compact('post','comments'));
     }
 
     public function create()
@@ -56,5 +56,17 @@ class PostController extends Controller
         ));
 
         return back()->with('success', 'You have successfully posted a status!');
+    }
+
+    public function destroy($postId)
+    {
+        $post = Post::where('id', $postId)->first();
+        //dd($post);
+        if ($post != null) {
+            $post->delete();
+            return redirect()->route('home')->with('success', 'You have successfully deleted your post!');
+        }
+
+        return back()->with('error', 'You can\'t delete your post!');
     }
 }

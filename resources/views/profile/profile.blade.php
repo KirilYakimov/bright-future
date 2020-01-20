@@ -20,12 +20,6 @@
                 <!-- User update/info -->
                 <div class="text-center col-md-3 mb-3">
                     <div>
-                        <button type="button" class="btn mb-2 btn-primary btn-block" data-toggle="modal" data-target="#followModal">
-                            Follow
-                        </button>
-                    </div>
-
-                    <div>
                         <button type="button" class="btn mb-2 btn-primary btn-block" data-toggle="modal" data-target="#profileModal">
                             Edit profile
                         </button>
@@ -83,13 +77,26 @@
 
                 <!-- User posts -->
                 <div class="col-md-9">
-                    @foreach($user->posts as $post)
+                    @forelse($posts as $post)
                     @include('layouts.posts.post')
-                    @endforeach
+                    @empty
+                    <div class="card shadow-lg bg-white mb-3">
+                        <div class="card-body text-center">
+                            <div class="card-title pt-3 pb-2 mb-2">
+                                <h3>Hello you still don't have any post yet! </h3>
+                                <a href="{{ route('home') }}">Click here to make your first post!</a>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse 
+                    <div class="col-12 row d-flex justify-content-center">
+                        {{ $posts->links() }}
+                    </div>
                 </div>
-
                 <!-- /User posts -->
-
 
                 <!-- Profile update modals -->
                 @include('layouts.modals.profile_image')

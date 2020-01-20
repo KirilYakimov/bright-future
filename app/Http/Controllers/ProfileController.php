@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
+use App\Post;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -13,9 +13,10 @@ class ProfileController extends Controller
 {
     public function index($user)
     {
-        $user = User::findOrFail($user);
         $this->middleware(['auth' => 'verified']);
-        return view('profile.profile', compact('user'));
+        $user = User::findOrFail($user);
+        $posts = Post::whereIn('user_id', $user)->latest()->paginate(5);
+        return view('profile.profile', compact('user','posts'));
     }
 
     public function edit()
@@ -28,10 +29,10 @@ class ProfileController extends Controller
         }
     }
 
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
         //Updates user info
-        if ($request->has('update_profile')) {
+        if (request()->has('update_profile')) {
             $userData = request()->validate([
                 'username' => 'required|string|max:255', Rule::unique('users')->ignore($user->id),
                 'email' => 'required|email|max:255', Rule::unique('users')->ignore($user->id),
@@ -44,10 +45,10 @@ class ProfileController extends Controller
         }
 
         //update profile picture
-        if ($request->has('update_image_profile')) {
+        if (request()->has('update_image_profile')) {
 
-            $image_path = $request->file('image');
-            $filename = time().".".$image_path->getClientOriginalExtension();
+            $image_path = request()->file('image');
+            $filename = time() . "." . $image_path->getClientOriginalExtension();
             Image::make($image_path)->save(public_path('storage/profile/' . $filename));
 
             $user = Auth::user();
@@ -58,7 +59,7 @@ class ProfileController extends Controller
         }
 
         //Updates user password
-        if ($request->has('update_password')) {
+        if (request()->has('update_password')) {
             $userPassword = request()->validate([
                 'password' => 'required|string|between:8,255',
                 'new_password' => 'required|string|confirmed|between:8,255|different:password',

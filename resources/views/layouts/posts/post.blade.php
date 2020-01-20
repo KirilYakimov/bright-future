@@ -16,18 +16,15 @@
 
             </div>
 
-            <!-- START dropdown-->
-            <div class="dropdown float-right">
-                <button class="btn btn-flat btn-flat-icon" type="button" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-camera"></i>
-                </button>
-                <div class="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style="position: absolute; transform: translate3d(-136px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
-                    <a class="dropdown-item" href="#">Hide post</a>
-                    <a class="dropdown-item" href="#">Stop following</a>
-                    <a class="dropdown-item" href="#">Report</a>
-                </div>
+            @if(($post->user_id == auth()->user()->id) && Route::current()->getName() == 'post.show')
+            <div class="ml-3">
+                <form method="post" action="{{ route('post.delete', $post->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Delete post</button>
+                </form>
             </div>
-            <!--/ dropdown -->
+            @endif
         </div>
 
         <!-- Post text -->
@@ -39,49 +36,73 @@
         <!--/ Post image -->
         @if($post->post_image != NULL)
         <div class="mt-3">
-            <img class="card-img-bottom" src="{{ asset('storage/post/'.$post->post_image) }}" alt="Post image">
+            <a href="{{ route('post.show', $post->id) }}"><img class="card-img-bottom" src="{{ asset('storage/post/'.$post->post_image) }}" alt="Post image"></a>
         </div>
         @endif
         <!--/ Post image -->
 
-        <!-- Likes and comments -->
-        <div class="mt-3 border-top border-bottom btn-toolbar">
-            <div class="btn-group">
-                <button class="btn btn-outline-dark">num of likes</button>
-            </div>
-
-            <div class="btn-group">
-                <button class="btn btn-outline-dark">num of comments</button>
-            </div>
+        <!-- Comments number -->
+        <div class="mt-3 border-top border-bottom btn-toolbar flex-row-reverse">
+            <a href="{{ route('post.show', $post->id) }}" class="btn btn-outline-dark">{{ $post->comments->count() }} comments</a>
+            @if(!(Route::current()->getName() == 'post.show'))
+            <a href="{{ route('post.show', $post->id) }}" class="btn btn-outline-dark">Comment</a>
+            @endif
         </div>
-        <!-- Likes and comments -->
+        <!-- Comments -->
 
+        @if(Route::current()->getName() == 'post.show')
         <!-- Write a comment -->
-        <form role="form" method="POST" action="#" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{ route('comment.store', $post->id) }}" enctype="multipart/form-data">
             @csrf
 
             <div class="input-group mb-2 mt-2">
                 <div class="input-group-prepend">
                     <img class="rounded-circle" src="{{ asset('storage/profile/'.auth()->user()->image) }}" style="width:50px; height:50px;" alt="profile picture">
                 </div>
-                <input type="text" class="form-control ml-1 mt-2" placeholder="Write a comment...">
+                <input type="text" class="form-control ml-1 mt-2" name="comment_text" placeholder="Write a comment...">
                 <div class="input-group-append">
-                    <button class="btn-sm btn-outline-success mt-2 mb-2" type="submit" name="comment">Comment</button>
+                    <button class="btn-sm btn-outline-success mt-2 mb-2" type="submit">Comment</button>
                 </div>
             </div>
         </form>
         <!--/ Write a comment -->
 
         <!-- Users coments -->
+        @forelse($post->comments as $comment)
         <div>
             <span class="float-left mr-2">
-                <a href=""><img class="rounded-circle" style="width:50px; height:50px;" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/6.jpg" alt="..."></a>
+                <a href=""><img class="rounded-circle" style="width:50px; height:50px;" src="{{ asset('storage/profile/'.$comment->user->image) }}" alt="..."></a>
             </span>
             <blockquote class="blockquote">
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                <p class="mb-0"><a href='#'>{{ $comment->user->username }}</a> {{ $comment->comment_text }} </p>
+                <footer class="blockquote-footer d-flex flex-row">
+                    <div class="mr-2">{{ date( 'F j, Y, g:i a', strtotime($comment->created_at)) }}</div>
+                    @if($comment->user_id == auth()->user()->id)
+                    <form method="post" action="{{ route('comment.delete', $comment->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn-sm btn-danger" type="submit">Delete</button>
+                    </form>
+                    @endif
+                </footer>
             </blockquote>
         </div>
+        @empty
+        <div class="card shadow-lg bg-white mb-3">
+            <div class="card-body text-center">
+                <div class="card-title pt-3 pb-2 mb-2">
+                    <h3>This post has no comments yet!</h3>
+                </div>
+            </div>
+        </div>
+        @endforelse
         <!--/ Users coments -->
+        
+        @if($post->comments->count() >= 8)
+        <div class="col-12 row d-flex justify-content-center">
+            {{ $comments->links() }}
+        </div>
+        @endif
+        @endif
     </div>
 </div>
