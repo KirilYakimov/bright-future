@@ -51,12 +51,13 @@ MAIL_PORT=2525
 MAIL_USERNAME= - Your testing mail
 MAIL_PASSWORD=    and password 
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS=null 
+MAIL_FROM_ADDRESS= - fill that 
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 After that you can run those Php artisan commands
 ```
+$ php artisan storage:link
 $ php artisan key:generate
-$ php artisane migrate
+$ php artisan migrate
 ```

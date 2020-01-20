@@ -86,9 +86,6 @@
                                 <h3>Hello you still don't have any post yet! </h3>
                                 <a href="{{ route('home') }}">Click here to make your first post!</a>
                             </div>
-                            <div>
-
-                            </div>
                         </div>
                     </div>
                     @endforelse 

@@ -17,7 +17,6 @@
                         @csrf
                         
                         <div class="form-row">
-                            <i class="far fa-address-book"></i>
                             <div class="font-weight-bold pb-1 mb-2">{{ __('Create your account') }}</div>
                         </div>
 

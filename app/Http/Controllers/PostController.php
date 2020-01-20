@@ -43,11 +43,6 @@ class PostController extends Controller
 
             $post->post_image = $filename;
             $imageArray = ['post_image' => $filename];
-
-            if (!$request->has('post_text')) {
-                auth()->user()->posts()->create($imageArray);
-                return back()->with('success', 'You have successfully posted a picture!');
-            }
         }
 
         auth()->user()->posts()->create(array_merge(

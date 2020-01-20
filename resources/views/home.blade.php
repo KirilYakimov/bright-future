@@ -33,8 +33,7 @@
                                 </div>
 
 
-                                <div class="form-row mb-0 justify-content-between">
-
+                                <div class="form-row mb-2">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('post_image') is-invalid @enderror" id="image" name="post_image">
                                         <label class="custom-file-label" for="image">Upload image</label>
@@ -45,12 +44,11 @@
                                         </span>
                                         @enderror
                                     </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn btn-primary">
-                                            {{ __('Create a post') }}
-                                        </button>
-                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn btn-primary">
+                                        {{ __('Create a post') }}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -62,8 +60,12 @@
                 @forelse($posts as $post)
                 @include('layouts.posts.post')
                 @empty
-                <div class="col-12">
-                    <h3>There are still no posts</h3>
+                <div class="card shadow-lg bg-white mb-3">
+                    <div class="card-body text-center">
+                        <div class="card-title pt-3 pb-2 mb-2">
+                            <h3>There are still no posts yet! </h3>
+                        </div>
+                    </div>
                 </div>
                 @endforelse
                 <div class="col-12 row d-flex justify-content-center">

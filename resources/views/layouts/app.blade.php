@@ -121,7 +121,7 @@
         <footer class="footer fixed-bottom mt-auto py-3 bg-dark font-small">
             <!-- Copyright -->
             <div class="container">
-                <div class="footer-copyright text-center">© 2020 Copyright:
+                <div class="footer-copyright text-center text-light">© 2020 Copyright:
                     <a href="{{ url('/home') }}">BrightFuture.com</a>
                 </div>
             </div>
